@@ -36,13 +36,43 @@ Constraints:
 #         """
 
 
-def climbStairs(n):
+def climbStairs(n, memo={}):
+	if n in memo:
+		return memo[n]
 
-    return
+	if n < 1:
+		return 0
+	elif n == 1:
+		return 1
+	elif n == 2:
+		return 2
+	else:
+		result = climbStairs(n-1, memo) + climbStairs(n-2, memo)
+		memo[n] = result
+		return result
+
+def loop_climbStairs(n):
+	if n == 1:
+		return 1
+	elif n == 2:
+		return 2
+	y = 1
+	x = 2
+	for _ in range(n-2):
+		temp = x
+		x = x + y
+		y = temp
+	return x
 
 def best_climbStairs(n):
-	return
+	paths = [0] * (n+1)
+	paths[0] = 1
+	paths[1] = 1
 
+	for i in range(2, n+1):
+		paths[i] = paths[i-1] + paths[i-2]
+
+	return paths[n]
 
 if __name__ == '__main__':
-	climbStairs(10)
+	climbStairs(100)
