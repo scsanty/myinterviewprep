@@ -36,10 +36,32 @@ Constraints:
 
 
 def maxProfit(prices):
-	return result
+	maxprice = prices[-1]
+	maxprofit = 0
+
+	for p in prices[-2::-1]:
+		maxprice = max(maxprice, p)
+		profit = maxprice - p
+		maxprofit = max(maxprofit, profit)
+	return maxprofit
 
 def best_maxProfit(prices):
-	return result
+	low = prices[0]
+	high = 0
+	best = 0
+	for price in prices:
+		if price < low:
+			low = price
+			high = 0
+		if price > high:
+			high = price
+			if (high - low) > best:
+				best = high - low
+
+	if (best) < 0:
+		return 0
+	else:
+		return best
 
 if __name__ == '__main__':
 	maxProfit([7,1,5,3,6,4])
