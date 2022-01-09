@@ -1,0 +1,1 @@
+cmd /k call conda activate xenv
